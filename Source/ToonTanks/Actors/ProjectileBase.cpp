@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectileBase::AProjectileBase()
@@ -16,6 +17,9 @@ AProjectileBase::AProjectileBase()
 	RootComponent = ProjectileMesh;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
+
+	ProjectileTrailParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Projectile Trail"));
+	ProjectileTrailParticle->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -41,10 +45,9 @@ void AProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 	if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, DamageType);
+		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, GetActorLocation());
+		Destroy();
 	}
 
-	// TODO: Play special effects
-
-	Destroy();
 }
 

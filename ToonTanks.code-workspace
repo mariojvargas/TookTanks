@@ -10,7 +10,12 @@
 		}
 	],
 	"settings": {
-		"typescript.tsc.autoDetect": "off"
+		"typescript.tsc.autoDetect": "off",
+		"C_Cpp.default.forcedInclude": [
+			"${default}",
+			"/Users/mario/Documents/Unreal Projects/ToonTanks/Intermediate/Build/Mac/x86_64/UE4Editor/Development/ToonTanks/Definitions.ToonTanks.h",
+			"/Users/mario/Documents/Unreal Projects/ToonTanks/Intermediate/Build/Mac/x86_64/ToonTanksEditor/Development/Engine/SharedPCH.Engine.ShadowErrors.h"
+		]
 	},
 	"extensions": {
 		"recommendations": [
